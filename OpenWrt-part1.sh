@@ -17,6 +17,37 @@ addFeeds(){
   fi
 }
 
+# Function to modify wireless configuration
+modify_wireless_config() {
+  # local wireless_config="/etc/config/wireless"
+  local wireless_config="/root/test.txt"
+
+  echo "Modifying wireless configuration..."
+
+  # Enable wireless
+  sed -i "s/option disabled '1'/option disabled '0'/g" $wireless_config
+  
+  # Set SSID and security
+  sed -i "s/option ssid '.*'/option ssid 'Openwrt'/g" $wireless_config
+  sed -i "s/option encryption '.*'/option encryption 'psk2'/g" $wireless_config
+  # Set band (2g or 5g)
+  # sed -i "s/option band '.*'/option band '$band'/" $wireless_config
+
+  # Check if 'option key' exists in the configuration file
+  if grep -q "option key" "$wireless_config"; then
+      # If it exists, replace the existing key with 'pistarlink'
+      sed -i "s/option key '.*'/option key '12345678'/g" "$wireless_config"
+  else
+      # If it doesn't exist, add the 'option key' line under the SSID configuration
+      sed -i "/option ssid 'Openwrt'/a \    option key '12345678'" "$wireless_config"
+  fi
+  
+  echo "Wireless configuration updated successfully!"
+}
+# execute
+modify_wireless_config
+
+
 # Uncomment a feed source
 # sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
 
