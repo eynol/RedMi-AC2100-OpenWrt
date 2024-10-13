@@ -19,8 +19,7 @@ addFeeds(){
 
 # Function to modify wireless configuration
 modify_wireless_config() {
-  # local wireless_config="/etc/config/wireless"
-  local wireless_config="/root/test.txt"
+  local wireless_config="/etc/config/wireless"
 
   echo "Modifying wireless configuration..."
 
