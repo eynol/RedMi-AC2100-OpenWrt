@@ -28,6 +28,7 @@ on:
         type: choice
         options:
         - master
+        - v23.05.5
         - v23.05.2
         - v22.03.6
         - v21.02.7
