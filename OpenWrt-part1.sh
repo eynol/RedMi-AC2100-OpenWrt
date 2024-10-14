@@ -20,7 +20,6 @@ addFeeds(){
 # Function to modify wireless configuration
 modify_wireless_config() {
   local wireless_config="./etc/config/wireless"
-
   echo "Modifying wireless configuration..."
 
   # Enable wireless
@@ -44,8 +43,10 @@ modify_wireless_config() {
   echo "Wireless configuration updated successfully!"
 }
 # execute
-modify_wireless_config
+# modify_wireless_config
 
+# open wireless 
+sed -i "/wireless.\${name}.disabled/d" package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
 # Uncomment a feed source
 # sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
